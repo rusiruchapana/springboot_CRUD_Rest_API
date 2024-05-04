@@ -34,6 +34,11 @@ public class userContoller {
         return new ResponseEntity<>(users , HttpStatus.OK);
     }
 
-
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> update(@PathVariable("id") Long userId , @RequestBody User user){
+        user.setId(userId);
+        User user1 = userService.update(user);
+        return new ResponseEntity<>(user1 , HttpStatus.OK);
+    }
 
 }

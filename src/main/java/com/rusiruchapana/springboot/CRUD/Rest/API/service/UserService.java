@@ -4,4 +4,5 @@ import com.rusiruchapana.springboot.CRUD.Rest.API.entity.User;
 
 public interface UserService {
     User createUser(User user);
+    User findById(Long userId);
 }

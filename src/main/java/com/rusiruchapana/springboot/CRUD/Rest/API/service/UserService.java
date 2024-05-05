@@ -19,7 +19,7 @@ public interface UserService {
 
     List<UserDto> findAll();
 
-    User update(User user);
+    UserDto update(UserDto userDto);
 
     void delete(Long userId);
 }

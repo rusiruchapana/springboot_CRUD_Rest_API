@@ -54,10 +54,10 @@ public class userContoller {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<User> update(@PathVariable("id") Long userId , @RequestBody User user){
-        user.setId(userId);
-        User user1 = userService.update(user);
-        return new ResponseEntity<>(user1 , HttpStatus.OK);
+    public ResponseEntity<UserDto> update(@PathVariable("id") Long userId , @RequestBody UserDto userDto){
+        userDto.setId(userId);
+        UserDto userDto1 = userService.update(userDto);
+        return new ResponseEntity<>(userDto1 , HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

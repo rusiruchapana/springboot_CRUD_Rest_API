@@ -42,8 +42,8 @@ public class userContoller {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long userId , @RequestBody User user){
-        user.setId(userId);
+    public ResponseEntity<String> delete(@PathVariable("id") Long userId){
+        
         userService.delete(userId);
         return ResponseEntity.ok("Succesfully deleted");
     }

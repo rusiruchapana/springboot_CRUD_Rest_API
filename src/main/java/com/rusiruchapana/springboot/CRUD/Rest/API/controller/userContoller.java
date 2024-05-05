@@ -41,4 +41,11 @@ public class userContoller {
         return new ResponseEntity<>(user1 , HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long userId , @RequestBody User user){
+        user.setId(userId);
+        userService.delete(userId);
+        return ResponseEntity.ok("Succesfully deleted");
+    }
+
 }

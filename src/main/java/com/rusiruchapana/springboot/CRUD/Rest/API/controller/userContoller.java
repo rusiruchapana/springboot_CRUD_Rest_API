@@ -1,5 +1,6 @@
 package com.rusiruchapana.springboot.CRUD.Rest.API.controller;
 
+import com.rusiruchapana.springboot.CRUD.Rest.API.dto.UserDto;
 import com.rusiruchapana.springboot.CRUD.Rest.API.entity.User;
 import com.rusiruchapana.springboot.CRUD.Rest.API.service.UserService;
 import lombok.AllArgsConstructor;
@@ -16,11 +17,19 @@ public class userContoller {
 
     private UserService userService;
 
+//    @PostMapping("/createUser")
+//    public ResponseEntity<User> createUser(@RequestBody User user){
+//        User savedData = userService.createUser(user);
+//        return new ResponseEntity<>(savedData , HttpStatus.CREATED);
+//    }
+
     @PostMapping("/createUser")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User savedData = userService.createUser(user);
-        return new ResponseEntity<>(savedData , HttpStatus.CREATED);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+        UserDto userDto1 = userService.createUser(userDto);
+        return new  ResponseEntity<>(userDto1 , HttpStatus.CREATED);
     }
+
+
 
     @GetMapping("{id}")
     public ResponseEntity<User> findById(@PathVariable("id") Long userId){
@@ -43,7 +52,7 @@ public class userContoller {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long userId){
-        
+
         userService.delete(userId);
         return ResponseEntity.ok("Succesfully deleted");
     }

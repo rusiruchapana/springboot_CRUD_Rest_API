@@ -1,5 +1,6 @@
 package com.rusiruchapana.springboot.CRUD.Rest.API.service.impl;
 
+import com.rusiruchapana.springboot.CRUD.Rest.API.dto.UserDto;
 import com.rusiruchapana.springboot.CRUD.Rest.API.entity.User;
 import com.rusiruchapana.springboot.CRUD.Rest.API.repository.UserRepository;
 import com.rusiruchapana.springboot.CRUD.Rest.API.service.UserService;
@@ -15,10 +16,39 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
+//    @Override
+//    public User createUser(User user) {
+//        return userRepository.save(user);
+//    }
+
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserDto createUser(UserDto userDto) {
+        User user = new User(
+                userDto.getId(),
+                userDto.getFirstName(),
+                userDto.getLastName(),
+                userDto.getEmail()
+        );
+
+        userRepository.save(user);
+
+        UserDto userDto1 = new UserDto(
+                user.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail()
+        );
+
+
+
+        return userDto1;
     }
+
+
+
+
+
+
 
     @Override
     public User findById(Long userId) {

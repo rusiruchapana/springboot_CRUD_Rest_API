@@ -31,11 +31,21 @@ public class userContoller {
 
 
 
-    @GetMapping("{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") Long userId){
-        User user = userService.findById(userId);
-        return  new ResponseEntity<>(user , HttpStatus.OK);
+//    @GetMapping("{id}")
+//    public ResponseEntity<User> findById(@PathVariable("id") Long userId){
+//        User user = userService.findById(userId);
+//        return  new ResponseEntity<>(user , HttpStatus.OK);
+//    }
+
+
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<UserDto> findById(@PathVariable("id") Long userId){
+        UserDto userDto = userService.findById(userId);
+        return new ResponseEntity<>(userDto , HttpStatus.OK);
     }
+
+
+
 
     @GetMapping("/findAll")
     public ResponseEntity<List<User>> findAll(){

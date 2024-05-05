@@ -29,13 +29,27 @@ public class UserServiceImpl implements UserService {
         UserDto userDto1 = UserMapper.mapToUserDto(user);
         return userDto1;
     }
-    
 
-    @Override
-    public User findById(Long userId) {
+
+//    @Override
+//    public User findById(Long userId) {
+//        Optional<User> optionalUser = userRepository.findById(userId);
+//        return optionalUser.get();
+//    }
+
+    public UserDto findById(Long userId){
         Optional<User> optionalUser = userRepository.findById(userId);
-        return optionalUser.get();
+        User user = optionalUser.get();
+        return UserMapper.mapToUserDto(user);
     }
+
+
+
+
+
+
+
+
 
     @Override
     public List<User> findAll() {

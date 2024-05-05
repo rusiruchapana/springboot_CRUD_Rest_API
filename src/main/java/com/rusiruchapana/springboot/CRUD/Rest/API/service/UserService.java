@@ -10,14 +10,12 @@ public interface UserService {
     UserDto createUser(UserDto userDto);
 
 
+    //User findById(Long userId);
+    UserDto findById(Long userId);
 
 
 
 
-
-
-
-    User findById(Long userId);
 
     List<User> findAll();
 

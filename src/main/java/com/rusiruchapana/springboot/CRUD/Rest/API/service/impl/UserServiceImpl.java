@@ -8,8 +8,10 @@ import com.rusiruchapana.springboot.CRUD.Rest.API.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -52,8 +54,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDto> findAll() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(UserMapper::mapToUserDto).collect(Collectors.toList());
     }
 
     @Override

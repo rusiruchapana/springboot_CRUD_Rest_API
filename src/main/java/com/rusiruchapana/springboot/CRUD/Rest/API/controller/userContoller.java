@@ -48,8 +48,8 @@ public class userContoller {
 
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<User>> findAll(){
-        List<User> users = userService.findAll();
+    public ResponseEntity<List<UserDto>> findAll(){
+        List<UserDto> users = userService.findAll();
         return new ResponseEntity<>(users , HttpStatus.OK);
     }
 

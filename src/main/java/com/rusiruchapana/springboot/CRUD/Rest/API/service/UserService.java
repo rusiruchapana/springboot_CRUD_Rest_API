@@ -17,7 +17,7 @@ public interface UserService {
 
 
 
-    List<User> findAll();
+    List<UserDto> findAll();
 
     User update(User user);
 

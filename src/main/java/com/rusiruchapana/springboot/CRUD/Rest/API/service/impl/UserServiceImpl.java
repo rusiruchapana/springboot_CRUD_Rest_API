@@ -60,7 +60,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto update(UserDto userDto) {
-        User existingUser =  userRepository.findById(userDto.getId()).get();
+        User existingUser =  userRepository.findById(userDto.getId()).orElseThrow(
+                ()-> new ResourceNotFoundException("User", "Id", userDto.getId())
+        );
         existingUser.setFirstName(userDto.getFirstName());
         existingUser.setLastName(userDto.getLastName());
         existingUser.setEmail(userDto.getEmail());
@@ -72,6 +74,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long userId) {
+        User existingUser =  userRepository.findById(userId).orElseThrow(
+                ()-> new ResourceNotFoundException("User", "Id", userId)
+        );
+
         userRepository.deleteById(userId);
     }
 }

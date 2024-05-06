@@ -2,6 +2,7 @@ package com.rusiruchapana.springboot.CRUD.Rest.API.service.impl;
 
 import com.rusiruchapana.springboot.CRUD.Rest.API.dto.UserDto;
 import com.rusiruchapana.springboot.CRUD.Rest.API.entity.User;
+import com.rusiruchapana.springboot.CRUD.Rest.API.exception.ResourceNotFoundException;
 import com.rusiruchapana.springboot.CRUD.Rest.API.mapper.UserMapper;
 import com.rusiruchapana.springboot.CRUD.Rest.API.repository.UserRepository;
 import com.rusiruchapana.springboot.CRUD.Rest.API.service.UserService;
@@ -43,19 +44,13 @@ public class UserServiceImpl implements UserService {
 //    }
 
     public UserDto findById(Long userId){
-        Optional<User> optionalUser = userRepository.findById(userId);
-        User user = optionalUser.get();
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new ResourceNotFoundException("User", "Id", userId)
+        );
+
         //return UserMapper.mapToUserDto(user);
-        return modelMapper.map(optionalUser , UserDto.class);
+        return modelMapper.map(user , UserDto.class);
     }
-
-
-
-
-
-
-
-
 
     @Override
     public List<UserDto> findAll() {

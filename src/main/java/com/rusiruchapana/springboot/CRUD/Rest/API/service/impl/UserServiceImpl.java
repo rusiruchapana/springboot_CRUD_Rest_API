@@ -3,6 +3,7 @@ package com.rusiruchapana.springboot.CRUD.Rest.API.service.impl;
 import com.rusiruchapana.springboot.CRUD.Rest.API.dto.UserDto;
 import com.rusiruchapana.springboot.CRUD.Rest.API.entity.User;
 import com.rusiruchapana.springboot.CRUD.Rest.API.exception.ResourceNotFoundException;
+import com.rusiruchapana.springboot.CRUD.Rest.API.exception.UserEmailExistException;
 import com.rusiruchapana.springboot.CRUD.Rest.API.mapper.UserMapper;
 import com.rusiruchapana.springboot.CRUD.Rest.API.repository.UserRepository;
 import com.rusiruchapana.springboot.CRUD.Rest.API.service.UserService;
@@ -29,6 +30,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto userDto) {
+        if(userRepository.findByEmail(userDto.getEmail()).isPresent()){
+            throw new UserEmailExistException("User email is already exist.");
+        }
+
         User user = UserMapper.mapToUser(userDto);
         userRepository.save(user);
         //UserDto userDto1 = UserMapper.mapToUserDto(user);

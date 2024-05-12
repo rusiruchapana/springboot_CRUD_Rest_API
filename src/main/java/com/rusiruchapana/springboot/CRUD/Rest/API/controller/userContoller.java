@@ -5,6 +5,7 @@ import com.rusiruchapana.springboot.CRUD.Rest.API.entity.User;
 import com.rusiruchapana.springboot.CRUD.Rest.API.exception.ErrorDetails;
 import com.rusiruchapana.springboot.CRUD.Rest.API.exception.ResourceNotFoundException;
 import com.rusiruchapana.springboot.CRUD.Rest.API.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class userContoller {
 //    }
 
     @PostMapping("/createUser")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
         UserDto userDto1 = userService.createUser(userDto);
         return new  ResponseEntity<>(userDto1 , HttpStatus.CREATED);
     }
@@ -58,7 +59,7 @@ public class userContoller {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserDto> update(@PathVariable("id") Long userId , @RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> update(@PathVariable("id") Long userId , @Valid @RequestBody UserDto userDto){
         userDto.setId(userId);
         UserDto userDto1 = userService.update(userDto);
         return new ResponseEntity<>(userDto1 , HttpStatus.OK);
